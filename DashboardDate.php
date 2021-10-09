@@ -11,41 +11,20 @@ $Month=substr($DAte,5,2);
 $Day=substr($DAte,-2,2);
 $CurrentDate=$Year.'-'.$Month.'-'.$Day;
 $Date=$Day.'-'.$Month.'-'.$Year;
-$select="SELECT        leftFail, leftPass, DateName, leftPass + leftFail AS TotalChecked
-FROM            dbo.View_left_Prd
-WHERE        (DateName = CONVERT(DATETIME, '$CurrentDate 00:00:00', 102))" ; 
+$select="SELECT        TOP (200) SUM(dbo.Tbl_Daily_Prd.TotalChecked) AS TotalChecked, SUM(dbo.Tbl_Daily_Prd.Pass) AS Pass, SUM(dbo.Tbl_Daily_Prd.Fail) AS Fail
+FROM            dbo.Tbl_Daily_Prd INNER JOIN
+                         dbo.tbl_Inv_Tran_Date ON dbo.Tbl_Daily_Prd.DayID = dbo.tbl_Inv_Tran_Date.DayNo
+WHERE        (dbo.tbl_Inv_Tran_Date.DateName = CONVERT(DATETIME, '$CurrentDate 00:00:00', 102))" ; 
 $result=sqlsrv_query($conn,$select);     
 $row = sqlsrv_fetch_array($result);
-$leftFail=$row['leftFail'];
- $leftPass=$row['leftPass'];
-$TotalChecked=$row['TotalChecked']; 
-if($TotalChecked==0){
+$Total_Fail=$row['Fail'];
+ $Total_Pass=$row['Pass'];
+$Checked=$row['TotalChecked']; 
+if($Checked==0){
   $RftData=0;
 }else{
-  $RftData=$leftPass/$TotalChecked;
+  $Total_RFT=(100/$Checked)*$Total_Pass;
 }
-$Rft=$RftData*100;
-$select1="SELECT        RightFail, RightPass, DateName
-FROM            dbo.View_Right_Prd
-WHERE        (DateName = CONVERT(DATETIME, '$CurrentDate 00:00:00', 102))" ;
-$result1=sqlsrv_query($conn,$select1);     
-$row1 = sqlsrv_fetch_array($result1);
-$RightFail1=$row1['RightFail'];
-$RightPass1=$row1['RightPass']; 
-$TotalChecked1=$RightPass1+$RightFail1;
-if($TotalChecked1==0){
- $RftData1=0;
-}else{
-$RftData1=$RightPass1/$TotalChecked1;
-}
-$Rft1=$RftData1*100;
-$Production= $leftPass+ $RightPass1;
-$RFTSum=$Rft+$Rft1;
-$RFTAvg=$RFTSum/2;
-$Checked=min($TotalChecked,$TotalChecked1);
-$Total_Pass=min($leftPass,$RightPass1);
-$Total_Fail=min($leftFail,$RightFail1);
-$Total_RFT=min($Rft,$Rft1);
 
 
 

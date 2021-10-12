@@ -113,14 +113,14 @@ $LoginName=$Data1['LoginName'];
 <i class="fa indicator-mn fa-angle-left"></i>
 </span></a>
 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
-<a href="ProductionG.php" class="dropdown-item">Gloves</a>
+<!-- <a href="ProductionG.php" class="dropdown-item">Gloves</a> -->
 <!-- <a href="ProductionBag.php" class="dropdown-item">Bags</a> -->
 <a href="POWiseprdReports.php" class="dropdown-item"> Reports</a>
-<a href="POWise.php" class="dropdown-item"> Summary</a>
+<!-- <a href="POWise.php" class="dropdown-item"> Summary</a> -->
 </div>
 </li>
 
-<li class="nav-item">
+<!-- <li class="nav-item">
 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 <i class="fa big-icon fa-exclamation-triangle"></i>
 <span class="mini-dn">Quality Check</span> 
@@ -129,11 +129,11 @@ $LoginName=$Data1['LoginName'];
 </span></a>
 <div role="menu" class="dropdown-menu left-menu-dropdown animated flipInX">
 <a href="QCSummary.php" class="dropdown-item">Gloves Summary</a>
-<!-- <a href="QCSummaryBag.php" class="dropdown-item">Bag Summary</a> -->
-<a href="PoWiseReport.php" class="dropdown-item"> Reports </a>
-<!-- <a href="#" class="dropdown-item">Football</a> -->
+<a href="QCSummaryBag.php" class="dropdown-item">Bag Summary</a> -->
+<!-- <a href="PoWiseReport.php" class="dropdown-item"> Reports </a> -->
+<!-- <a href="#" class="dropdown-item">Football</a> 
 </div>
-</li>
+</li>-->
 <!-- <li class="nav-item">
 <a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle">
 <i class="fa big-icon fa-bar-chart-o"></i>
